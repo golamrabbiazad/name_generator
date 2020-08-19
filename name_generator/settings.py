@@ -1,6 +1,10 @@
 import os
-import dotenv
 from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
+env_path = Path('.') / '.env'
+load_dotenv(find_dotenv())
+load_dotenv(dotenv_path=env_path)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
@@ -8,12 +12,8 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-dotenv_file = os.path.join(BASE_DIR, ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
-
-# Update secret key
-SECRET_KEY = os.environ['SECRET_KEY']
+# secret key
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
